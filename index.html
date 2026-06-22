@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belarus</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://w3.org">
+                    <path d="M50 15 L85 45 L70 85 L30 85 L15 45 Z" fill="none" stroke="currentColor" stroke-width="5"/>
+                </svg>
+            </a>
+                <span class="logo-text"><a href="index.html" class="logo-bel">Belarus</a></span>
+        </div>
+        <div class="container">
+            <div class="header-nav-links">
+                <a href="index.html">Главная</a>
+                <a href="#">Обзор</a>
+                <div class="dropdown">
+  <a href="#" class="dropdown-toggle">Регионы</a>
+  <ul class="dropdown-menu">
+    <li><a href="brest.html">Брестская область</a></li>
+    <li><a href="vitebsk.html">Витебская область</a></li>
+    <li><a href="gomel.html">Гомельская область</a></li>
+    <li><a href="grodno.html">Гродненская область</a></li>
+    <li><a href="minsk.html">Минская область</a></li>
+    <li><a href="mogilev.html">Могилевская область</a></li>
+  </ul>
+</div>
+            </div>
+        </div>
+    </header>
+    <section class="banner">
+        <div class="video-banner">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6YNmRPK29oE?si=QQAiQWYqwTsrGHpv&amp;autoplay=1&amp;mute=1&amp;controls=0&amp;rel=0&amp;modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="banner-overlay"></div>
+        <div class="banner-text">
+            <h1 class="banner-text-title">Беларусь — страна под белыми крыльями</h1>
+            <p class="banner-text-subtitle">Культура и наследие</p>
+            <!-- <div class="scroll-thing">
+                <div class="scroll-line"></div>
+            </div> -->
+        </div>
+    </section>
+    <section class="facts" id="facts">
+        <div class="container">
+            <h2 class="facts-title reveal reveal-up">Главные показатели</h2>
+            <div class="grid-facts">
+                <div class="fact-item reveal reveal-up">
+                    <span class="fact-label">Территория</span>
+                    <span class="fact-value">207.6</span>
+                    <span class="fact-unit">тыс. кв. км</span>
+                </div>
+                <div class="fact-item reveal reveal-up">
+                    <span class="fact-label">Столица</span>
+                    <span class="fact-value">Минск</span>
+                    <span class="fact-unit">основан в 1067 году</span>
+                </div>
+                <div class="fact-item reveal reveal-up">
+                    <span class="fact-label">Население</span>
+                    <span class="fact-value">~9.2</span>
+                    <span class="fact-unit">млн человек</span>
+                </div>
+                <div class="fact-item reveal reveal-up">
+                    <span class="fact-label">Локация</span>
+                    <span class="fact-value">Центр</span>
+                    <span class="fact-unit">географический центр Европы</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="regions">
+        <div class="container">
+            <div class="regions-grid">
+                <button class="region-card reveal reveal-up" data-region="minsk">
+                    <span class="region-number">01</span>
+                    <span class="region-name">Минская область</span>
+                </button>
+                <button class="region-card reveal reveal-up" data-region="brest">
+                    <span class="region-number">02</span>
+                    <span class="region-name">Брестская область</span>
+                </button>
+                <button class="region-card reveal reveal-up" data-region="vitebsk">
+                    <span class="region-number">03</span>
+                    <span class="region-name">Витебская область</span>
+                </button>
+                <button class="region-card reveal reveal-up" data-region="gomel">
+                    <span class="region-number">04</span>
+                    <span class="region-name">Гомельская область</span>
+                </button>
+                <button class="region-card reveal reveal-up" data-region="grodno">
+                    <span class="region-number">05</span>
+                    <span class="region-name">Гродненская область</span>
+                </button>
+                <button class="region-card reveal reveal-up" data-region="mogilev">
+                    <span class="region-number">06</span>
+                    <span class="region-name">Могилевская область</span>
+                </button>
+            </div>
+            <div class="details reveal reveal-up" id="detailsPanel">
+                <div class="details-header">
+                    <span class="details-index" id="detailsIndex">00</span>
+                    <h3 class="details-title" id="detailsTitle">Выберите область</h3>
+                </div>
+                <p class="details-text" id="detailsText">Нажмите на любой регион выше, чтобы открыть краткую справку и ключевые особенности территории.</p>
+        </div>
+    </section>
+    <footer class="footer reveal reveal-up">
+        <div class="footer-container">
+            <div class="footer-bimbimbambam">
+                <p class="author-credits">бэмбэмбэм</p>
+                <p class="current-year">&copy; 2026</p>
+            </div>
+            <div class="footer-socials">
+                <a href="#" class="social-link">OK</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Telegram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
