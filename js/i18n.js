@@ -177,7 +177,7 @@ const i18n = {
         document.documentElement.setAttribute('lang', lang === 'be' ? 'be' : 'ru');
 
         const btn = document.querySelector('.lang-toggle');
-        if (btn) btn.textContent = lang === 'be' ? 'RU' : 'BE';
+        if (btn) btn.textContent = lang === 'be' ? 'RU' : 'BY';
     },
 
     walkDOM: function(node, toBe) {
