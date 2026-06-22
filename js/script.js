@@ -93,3 +93,64 @@ document.addEventListener('click', () => {
         iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     }
 }, { once: true });
+
+function animateCounter(el) {
+    const target = parseFloat(el.getAttribute('data-target'));
+    const duration = 2000;
+    const start = performance.now();
+    const prefix = el.getAttribute('data-prefix') || '';
+
+    function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = progress * (2 - progress);
+        const current = eased * target;
+
+        if (Number.isInteger(target)) {
+            el.textContent = prefix + Math.round(current);
+        } else {
+            const decimals = (target.toString().split('.')[1] || '').length;
+            el.textContent = prefix + current.toFixed(decimals);
+        }
+
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
+const factsSection = document.querySelector('.facts');
+if (factsSection) {
+    new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                document.querySelectorAll('.fact-value[data-target]').forEach(el => {
+                    if (!el.classList.contains('counted')) {
+                        el.classList.add('counted');
+                        animateCounter(el);
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.3 }).observe(factsSection);
+}
+
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.header-nav-links');
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+    });
+}
+
+const toggle = document.querySelector('.theme-toggle');
+const html = document.documentElement;
+const saved = localStorage.getItem('theme');
+if (saved) html.setAttribute('data-theme', saved);
+if (toggle) {
+    toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    });
+}
