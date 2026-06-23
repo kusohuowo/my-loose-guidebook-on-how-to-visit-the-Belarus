@@ -250,6 +250,77 @@ body{
 }
 /* .scroll-thing{}
 .scroll-line{} */
+.about{
+    padding: 120px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.about-title{
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+.about-content{
+    max-width: 700px;
+}
+.about-text{
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+.about-layout{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+.about-layout .container{
+    flex: 1;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+}
+.about-flag-side{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+.about-flag{
+    width: 400px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+}
+.about-flag-caption{
+    font-size: 15px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    opacity: 0.85;
+}
+
+@media(max-width: 768px){
+    .about{ padding: 80px 0; }
+    .about-layout{ flex-direction: column; gap: 32px; }
+    .about-text{ font-size: 16px; }
+    .about-flag-side{ flex-direction: row; margin-top: 0; }
+    .about-flag{ width: 80px; }
+}
+@media(max-width: 480px){
+    .about{ padding: 60px 0; }
+    .about-title{ margin-bottom: 24px; }
+    .about-text{ font-size: 15px; }
+    .about-symbols{ gap: 24px; margin-top: 32px; }
+}
+
 .facts{
     padding: 140px 0;
     border-bottom: 1px solid var(--border-color);
@@ -338,6 +409,16 @@ body{
     color: var(--text-secondary);
     max-width: 900px;
     line-height: 1.7;
+}
+.map-region-label{
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    fill: var(--text-primary);
+}
+.map-region-label.visible{
+    opacity: 1;
 }
 .map-block__area-action{
     outline: 0;
@@ -985,4 +1066,94 @@ body{
 @keyframes panelReveal{
     0% { opacity: 0; transform: translateY(10px); }
     100% { opacity: 1; transform: translateY(0); }
+}
+
+.lightbox{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.lightbox.open{
+    opacity: 1;
+    pointer-events: auto;
+}
+.lightbox-img{
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next{
+    position: absolute;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover{
+    background: rgba(255,255,255,0.25);
+}
+.lightbox-close{
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+}
+.lightbox-close::before{
+    content: '✕';
+    font-size: 22px;
+    line-height: 1;
+}
+.lightbox-prev,
+.lightbox-next{
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    font-size: 36px;
+}
+.lightbox-prev::before{
+    content: '‹';
+    line-height: 1;
+}
+.lightbox-next::before{
+    content: '›';
+    line-height: 1;
+}
+.lightbox-prev{ left: 20px; }
+.lightbox-next{ right: 20px; }
+.lightbox-counter{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+@media(max-width: 480px){
+    .lightbox-prev,
+    .lightbox-next{ width: 40px; height: 40px; font-size: 28px; }
+    .lightbox-prev{ left: 8px; }
+    .lightbox-next{ right: 8px; }
+    .lightbox-close{ top: 10px; right: 10px; width: 38px; height: 38px; }
+    .lightbox-img{ max-width: 96vw; max-height: 80vh; }
 }

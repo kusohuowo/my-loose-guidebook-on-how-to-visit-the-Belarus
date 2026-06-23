@@ -134,6 +134,92 @@ if (factsSection) {
     }, { threshold: 0.3 }).observe(factsSection);
 }
 
+const regionNames = {
+    ru: { minsk: 'Минская область', brest: 'Брестская область', vitebsk: 'Витебская область', gomel: 'Гомельская область', grodno: 'Гродненская область', mogilev: 'Могилевская область' },
+    be: { minsk: 'Мінская вобласць', brest: 'Брэсцкая вобласць', vitebsk: 'Віцебская вобласць', gomel: 'Гомельская вобласць', grodno: 'Гродзенская вобласць', mogilev: 'Магілёўская вобласць' }
+};
+
+const mapSvg = document.querySelector('.map-block__main-image');
+if (mapSvg) {
+    const ns = 'http://www.w3.org/2000/svg';
+    document.querySelectorAll('.map-block__area-action[data-region]').forEach(group => {
+        const region = group.getAttribute('data-region');
+        if (!region || region === 'minsk-city') return;
+        const path = group.querySelector('.map-block__area-path');
+        if (!path) return;
+        const bbox = path.getBBox();
+        const cx = bbox.x + bbox.width / 2;
+        const cy = bbox.y + bbox.height / 2;
+        const text = document.createElementNS(ns, 'text');
+        text.setAttribute('x', cx);
+        text.setAttribute('y', cy);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('dominant-baseline', 'central');
+        text.setAttribute('font-size', '13');
+        text.setAttribute('font-weight', '600');
+        text.setAttribute('stroke', 'rgba(255,255,255,0.85)');
+        text.setAttribute('stroke-width', '3');
+        text.setAttribute('paint-order', 'stroke');
+        text.setAttribute('class', 'map-region-label');
+        text.textContent = regionNames.ru[region] || region;
+        group.appendChild(text);
+        group.addEventListener('mouseenter', () => {
+            const i18nLang = localStorage.getItem('i18n') || 'ru';
+            text.textContent = regionNames[i18nLang]?.[region] || regionNames.ru[region] || region;
+            text.classList.add('visible');
+        });
+        group.addEventListener('mouseleave', () => {
+            text.classList.remove('visible');
+        });
+    });
+}
+
+const lightboxHtml = document.createElement('div');
+lightboxHtml.className = 'lightbox';
+lightboxHtml.innerHTML = '<button class="lightbox-close" aria-label="Закрыть"></button><button class="lightbox-prev" aria-label="Назад"></button><button class="lightbox-next" aria-label="Вперёд"></button><img class="lightbox-img" src="" alt=""><span class="lightbox-counter"></span>';
+document.body.appendChild(lightboxHtml);
+
+const lightbox = document.querySelector('.lightbox');
+const lightboxImg = lightbox.querySelector('.lightbox-img');
+const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+const lbImages = document.querySelectorAll('.info-desk img');
+let lbIndex = 0;
+
+function openLightbox(index) {
+    lbIndex = index;
+    lightboxImg.src = lbImages[index].src;
+    lightboxCounter.textContent = (index + 1) + ' / ' + lbImages.length;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+}
+function prevImage() {
+    openLightbox((lbIndex - 1 + lbImages.length) % lbImages.length);
+}
+function nextImage() {
+    openLightbox((lbIndex + 1) % lbImages.length);
+}
+
+lbImages.forEach((img, i) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => openLightbox(i));
+});
+lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+lightbox.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+lightbox.querySelector('.lightbox-next').addEventListener('click', nextImage);
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
+});
+
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.header-nav-links');
 if (hamburger && navLinks) {
